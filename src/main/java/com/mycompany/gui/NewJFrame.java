@@ -71,7 +71,7 @@ public class NewJFrame extends javax.swing.JFrame {
         txt.setBackground(new java.awt.Color(32, 39, 44));
         txt.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         txt.setForeground(new java.awt.Color(255, 255, 255));
-        txt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txt.setName("txt"); // NOI18N
         txt.addActionListener(new java.awt.event.ActionListener() {
@@ -610,7 +610,10 @@ public class NewJFrame extends javax.swing.JFrame {
      
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         apearTxt = txt.getText();
-        if(txt.getText().length()>0){
+        if(apearTxt.length()==0){
+            showMessageDialog(null, "ERORR \nThere are no equations", "Equals cannot be used", ERROR_MESSAGE);
+            return;
+        }else{
         for(int i =0;i<apearTxt.length();i++){
           System.out.print("here is chare" +Character.toString(apearTxt.charAt(i))+ "\n");
           if(apearTxt.charAt(i)== op){
@@ -641,7 +644,7 @@ public class NewJFrame extends javax.swing.JFrame {
            break;
            case '/':
                if(num2 ==0){//لو بيقسم علي صفر هيطلع ارور
-                showMessageDialog(null, "ERORR \ncan't divided by zero", "Title", ERROR_MESSAGE);
+                showMessageDialog(null, "ERORR \ncan't divided by zero", "divid erorr", ERROR_MESSAGE);
                 txt.setText("");
             }else{
             result=num1/num2;
@@ -678,7 +681,7 @@ public class NewJFrame extends javax.swing.JFrame {
         jLabel1.setText("DARKNODE ON");
         Color color_dark = new Color(39,49,57);
         Color color_white = new Color(255, 255, 255); 
-        Color color_txt_dark = new Color(56,116,120);
+        Color color_txt_dark = new Color(32,39,44);
         Color colot_btw_dark = new Color(32,39,44);
         getContentPane().setBackground(color_dark);
         jLabel1.setForeground(color_white);
