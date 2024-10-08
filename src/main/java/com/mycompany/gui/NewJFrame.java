@@ -5,6 +5,11 @@
 package com.mycompany.gui;
 
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 
 /**
  *
@@ -17,7 +22,7 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
-        Color col = new Color(98,149,132);
+        Color col = new Color(39,49,57);
         getContentPane().setBackground(col);
     }
 
@@ -55,16 +60,19 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton22 = new javax.swing.JButton();
         jButton23 = new javax.swing.JButton();
         jButton24 = new javax.swing.JButton();
-        equ = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(98, 149, 132));
+        setBackground(new java.awt.Color(39, 49, 57));
         setForeground(java.awt.Color.orange);
         setResizable(false);
 
-        txt.setBackground(new java.awt.Color(56, 116, 120));
+        txt.setBackground(new java.awt.Color(32, 39, 44));
         txt.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        txt.setForeground(new java.awt.Color(255, 255, 255));
         txt.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txt.setName("txt"); // NOI18N
         txt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +80,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(36, 54, 66));
+        jButton1.setBackground(new java.awt.Color(32, 39, 44));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton1.setForeground(new java.awt.Color(226, 241, 231));
         jButton1.setText("0");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -83,7 +92,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(36, 54, 66));
+        jButton2.setBackground(new java.awt.Color(32, 39, 44));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(226, 241, 231));
         jButton2.setText("7");
         jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -93,7 +103,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(36, 54, 66));
+        jButton3.setBackground(new java.awt.Color(32, 39, 44));
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton3.setForeground(new java.awt.Color(226, 241, 231));
         jButton3.setText("4");
         jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -103,7 +114,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(36, 54, 66));
+        jButton4.setBackground(new java.awt.Color(32, 39, 44));
+        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton4.setForeground(new java.awt.Color(226, 241, 231));
         jButton4.setText("1");
         jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -113,7 +125,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setBackground(new java.awt.Color(36, 54, 66));
+        jButton5.setBackground(new java.awt.Color(32, 39, 44));
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton5.setForeground(new java.awt.Color(226, 241, 231));
         jButton5.setText(".");
         jButton5.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -123,7 +136,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(36, 54, 66));
+        jButton6.setBackground(new java.awt.Color(32, 39, 44));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(226, 241, 231));
         jButton6.setText("2");
         jButton6.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -133,7 +147,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setBackground(new java.awt.Color(36, 54, 66));
+        jButton7.setBackground(new java.awt.Color(32, 39, 44));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton7.setForeground(new java.awt.Color(226, 241, 231));
         jButton7.setText("5");
         jButton7.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -143,7 +158,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setBackground(new java.awt.Color(36, 54, 66));
+        jButton8.setBackground(new java.awt.Color(32, 39, 44));
+        jButton8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton8.setForeground(new java.awt.Color(226, 241, 231));
         jButton8.setText("8");
         jButton8.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -153,7 +169,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setBackground(new java.awt.Color(36, 54, 66));
+        jButton9.setBackground(new java.awt.Color(32, 39, 44));
+        jButton9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton9.setForeground(new java.awt.Color(226, 241, 231));
         jButton9.setText("3");
         jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -163,7 +180,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setBackground(new java.awt.Color(36, 54, 66));
+        jButton10.setBackground(new java.awt.Color(32, 39, 44));
+        jButton10.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton10.setForeground(new java.awt.Color(226, 241, 231));
         jButton10.setText("9");
         jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -173,7 +191,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setBackground(new java.awt.Color(36, 54, 66));
+        jButton11.setBackground(new java.awt.Color(32, 39, 44));
+        jButton11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton11.setForeground(new java.awt.Color(226, 241, 231));
         jButton11.setText("6");
         jButton11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -183,7 +202,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton14.setBackground(new java.awt.Color(36, 54, 66));
+        jButton14.setBackground(new java.awt.Color(32, 39, 44));
+        jButton14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton14.setForeground(new java.awt.Color(226, 241, 231));
         jButton14.setText("DEL");
         jButton14.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -193,7 +213,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton15.setBackground(new java.awt.Color(36, 54, 66));
+        jButton15.setBackground(new java.awt.Color(32, 39, 44));
+        jButton15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton15.setForeground(new java.awt.Color(226, 241, 231));
         jButton15.setText("x");
         jButton15.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -203,7 +224,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton16.setBackground(new java.awt.Color(36, 54, 66));
+        jButton16.setBackground(new java.awt.Color(32, 39, 44));
+        jButton16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton16.setForeground(new java.awt.Color(226, 241, 231));
         jButton16.setText("+");
         jButton16.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -213,7 +235,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton17.setBackground(new java.awt.Color(36, 54, 66));
+        jButton17.setBackground(new java.awt.Color(32, 39, 44));
+        jButton17.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton17.setForeground(new java.awt.Color(226, 241, 231));
         jButton17.setText("-");
         jButton17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -223,7 +246,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton18.setBackground(new java.awt.Color(36, 54, 66));
+        jButton18.setBackground(new java.awt.Color(32, 39, 44));
+        jButton18.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton18.setForeground(new java.awt.Color(226, 241, 231));
         jButton18.setText("AC");
         jButton18.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -233,7 +257,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton19.setBackground(new java.awt.Color(36, 54, 66));
+        jButton19.setBackground(new java.awt.Color(32, 39, 44));
+        jButton19.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton19.setForeground(new java.awt.Color(226, 241, 231));
         jButton19.setText("÷");
         jButton19.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -243,7 +268,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton20.setBackground(new java.awt.Color(36, 54, 66));
+        jButton20.setBackground(new java.awt.Color(32, 39, 44));
+        jButton20.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton20.setForeground(new java.awt.Color(226, 241, 231));
         jButton20.setText("=");
         jButton20.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -253,7 +279,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setBackground(new java.awt.Color(36, 54, 66));
+        jButton12.setBackground(new java.awt.Color(32, 39, 44));
         jButton12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton12.setForeground(new java.awt.Color(226, 241, 231));
         jButton12.setText("tan");
@@ -264,8 +290,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton13.setBackground(new java.awt.Color(36, 54, 66));
-        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton13.setBackground(new java.awt.Color(32, 39, 44));
+        jButton13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton13.setForeground(new java.awt.Color(226, 241, 231));
         jButton13.setText("(");
         jButton13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -275,8 +301,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton21.setBackground(new java.awt.Color(36, 54, 66));
-        jButton21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton21.setBackground(new java.awt.Color(32, 39, 44));
+        jButton21.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jButton21.setForeground(new java.awt.Color(226, 241, 231));
         jButton21.setText(")");
         jButton21.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -286,7 +312,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton22.setBackground(new java.awt.Color(36, 54, 66));
+        jButton22.setBackground(new java.awt.Color(32, 39, 44));
         jButton22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton22.setForeground(new java.awt.Color(226, 241, 231));
         jButton22.setText("sin");
@@ -297,8 +323,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton23.setBackground(new java.awt.Color(36, 54, 66));
-        jButton23.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton23.setBackground(new java.awt.Color(32, 39, 44));
+        jButton23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton23.setForeground(new java.awt.Color(226, 241, 231));
         jButton23.setText("cos");
         jButton23.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -308,7 +334,8 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton24.setBackground(new java.awt.Color(36, 54, 66));
+        jButton24.setBackground(new java.awt.Color(32, 39, 44));
+        jButton24.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton24.setForeground(new java.awt.Color(226, 241, 231));
         jButton24.setText("ANS");
         jButton24.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -318,7 +345,19 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        equ.setText("000");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        jToggleButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jToggleButton1KeyPressed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("DARKNODE ON");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -328,61 +367,62 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jButton20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(61, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(equ)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(equ)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel1)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -418,7 +458,7 @@ public class NewJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton23, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -433,7 +473,7 @@ public class NewJFrame extends javax.swing.JFrame {
                                 .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
         );
@@ -458,6 +498,8 @@ public class NewJFrame extends javax.swing.JFrame {
         }
   
     }
+    
+    
     private void txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtActionPerformed
@@ -515,7 +557,7 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -549,7 +591,10 @@ public class NewJFrame extends javax.swing.JFrame {
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         oper('-');
     }//GEN-LAST:event_jButton17ActionPerformed
-
+    
+  
+    
+     
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
        apearTxt = txt.getText();
         if(txt.getText().length()>0){
@@ -565,34 +610,77 @@ public class NewJFrame extends javax.swing.JFrame {
     }
         num2 = Double.parseDouble(apearTxt);
        
+       switch(op){
+           case '+':
+            result=num1+num2;
+            txt.setText(String.valueOf(result));
+            temp = result;//عشان يخزن القيمة في ذرار الانس
+            break;
+           case '-':
+            result=num1-num2;
+            txt.setText(String.valueOf(result));
+            temp = result;//عشان يخزن القيمة في ذرار الانس
+            break;
+           case '*':
+            result=num1*num2;
+           txt.setText(String.valueOf(result));
+           temp = result;//عشان يخزن القيمة في ذرار الانس
+           break;
+           case '/':
+               if(num2 ==0){//لو بيقسم علي صفر هيطلع ارور
+                showMessageDialog(null, "ERORR \ncan't divided by zero", "Title", ERROR_MESSAGE);
+                txt.setText("");
+            }else{
+            result=num1/num2;
+            txt.setText(String.valueOf(result));
+            temp = result;//عشان يخزن القيمة في ذرار الانس
+            }
+            break;        
+         }
+        
        
-       if(op=='+'){
-           result=num1+num2;
-           txt.setText(String.valueOf(result));
-           temp = result;
-        }else if(op=='-'){
-           result=num1-num2;
-           txt.setText(String.valueOf(result));
-           temp = result;
-        }else if(op=='*'){
-           result=num1*num2;
-           txt.setText(String.valueOf(result));
-           temp = result;
-        }else if(op=='/'){
-           result=num1/num2;
-           txt.setText(String.valueOf(result));
-           temp = result;
-        }
-          
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        txt.setText(String.valueOf(temp));
+        txt.setText(txt.getText()+String.valueOf(temp));
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if (jToggleButton1.isSelected()) {//لو كان شغال هيشغل اليت مود
+        
+        jLabel1.setText("DARKMODE OFF");
+        Color color_white = new Color(255, 255, 255); 
+        Color color_txt_light = new Color(207,209,208);
+         Color color_label_dark = new Color(0,0,0);
+        getContentPane().setBackground(color_white);
+        txt.setBackground(color_txt_light );
+        txt.setForeground(color_label_dark);
+        jLabel1.setForeground(color_label_dark);
+        
+        
+    } else {
+        
+        jLabel1.setText("DARKNODE ON");
+        Color color_dark = new Color(39,49,57);
+        Color color_white = new Color(255, 255, 255); 
+        Color color_txt_dark = new Color(56,116,120);
+        Color colot_btw_dark = new Color(32,39,44);
+        getContentPane().setBackground(color_dark);
+        jLabel1.setForeground(color_white);
+        txt.setBackground(color_txt_dark);
+        txt.setForeground(color_white);
+        
+        
+    }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jToggleButton1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -630,7 +718,6 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel equ;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -655,6 +742,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField txt;
     // End of variables declaration//GEN-END:variables
 }
