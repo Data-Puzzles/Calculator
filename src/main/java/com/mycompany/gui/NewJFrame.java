@@ -484,6 +484,7 @@ public class NewJFrame extends javax.swing.JFrame {
     double num1,num2,result,temp;
     String apearTxt;
     char op;
+    boolean change_sign=false; 
     
     private void set(String s){
         String all = txt.getText()+s;
@@ -491,12 +492,24 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     private void oper(char c){
+        String apeartxt = txt.getText();
+        
+        
+        
         if(txt.getText().length()>0){
-        num1 = Double.parseDouble(txt.getText());
-        op=c;
-        txt.setText(txt.getText()+String.valueOf(c));
+            char lastChar = apeartxt.charAt(apeartxt.length() - 1);
+            if (lastChar==op &&c !='-'){
+                showMessageDialog(null, "ERORR \ncan't add more than one operation", "Operation erorr", ERROR_MESSAGE);
+            }else {
+            num1 = Double.parseDouble(txt.getText());
+            op=c;
+            txt.setText(txt.getText()+String.valueOf(c));
+            }
+        }else if(txt.getText().length()==0&&c=='-'){
+                change_sign=true;
+                txt.setText(txt.getText()+'-');
+            
         }
-  
     }
     
     
@@ -596,7 +609,7 @@ public class NewJFrame extends javax.swing.JFrame {
     
      
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-       apearTxt = txt.getText();
+        apearTxt = txt.getText();
         if(txt.getText().length()>0){
         for(int i =0;i<apearTxt.length();i++){
           System.out.print("here is chare" +Character.toString(apearTxt.charAt(i))+ "\n");
@@ -637,8 +650,6 @@ public class NewJFrame extends javax.swing.JFrame {
             }
             break;        
          }
-        
-       
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
