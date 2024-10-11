@@ -4,6 +4,8 @@
  */
 package com.mycompany.calc;
 
+import Calculation.Evaluator;
+import Exceptions.CalculatorException;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
@@ -24,6 +26,7 @@ public class MainFrame extends javax.swing.JFrame {
     // my vairiables-
     private JButton btw[];
     private JButton Operations[];
+    private Evaluator ev;
     
     /**
      * Creates new form NewJFrame
@@ -32,6 +35,12 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         Color col = new Color(39,49,57);
         getContentPane().setBackground(col);
+        
+        try {
+            ev = new Evaluator();
+        } catch (CalculatorException e) {
+            
+        }
         
       //buttons in main 
         btw = new JButton[25];
@@ -1026,49 +1035,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tanActionPerformed
 
     private void equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalActionPerformed
-        apearTxt = txt.getText();
-        if(apearTxt.length()==0){
-            showMessageDialog(null, "ERORR \nThere are no equations", "Equals cannot be used", ERROR_MESSAGE);
-            return;
-        }else{
-            for(int i =0;i<apearTxt.length();i++){
-                System.out.print("here is chare" +Character.toString(apearTxt.charAt(i))+ "\n");
-                if(apearTxt.charAt(i)== op){
-                    String remaining = apearTxt.substring(i + 1);
-                    System.out.print("remaining :"+ remaining);
-                    apearTxt=remaining;
-                    break;
-                }
-            }
-        }
-        num2 = Double.parseDouble(apearTxt);
-
-        switch(op){
-            case '+':
-            result=num1+num2;
-            txt.setText(String.valueOf(result));
-            temp = result;//عشان يخزن القيمة في ذرار الانس
-            break;
-            case '-':
-            result=num1-num2;
-            txt.setText(String.valueOf(result));
-            temp = result;//عشان يخزن القيمة في ذرار الانس
-            break;
-            case '*':
-            result=num1*num2;
-            txt.setText(String.valueOf(result));
-            temp = result;//عشان يخزن القيمة في ذرار الانس
-            break;
-            case '/':
-            if(num2 ==0){//لو بيقسم علي صفر هيطلع ارور
-                showMessageDialog(null, "ERORR \ncan't divided by zero", "divid erorr", ERROR_MESSAGE);
-                txt.setText("");
-            }else{
-                result=num1/num2;
-                txt.setText(String.valueOf(result));
-                temp = result;//عشان يخزن القيمة في ذرار الانس
-            }
-            break;
+        String m = txt.getText();
+        try{
+          txt.setText(String.valueOf(ev.calculateExpression(m))); 
+        }catch (CalculatorException e){
+            System.out.println(e);
         }
     }//GEN-LAST:event_equalActionPerformed
 
@@ -1077,19 +1048,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ACActionPerformed
 
     private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
-        oper('-');
+        
     }//GEN-LAST:event_minusActionPerformed
 
     private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
-        oper('+');
+        
     }//GEN-LAST:event_plusActionPerformed
 
     private void dividActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dividActionPerformed
-        oper('/');
+        
     }//GEN-LAST:event_dividActionPerformed
 
     private void multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multActionPerformed
-        oper('*');
+        
     }//GEN-LAST:event_multActionPerformed
 
     private void DELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELActionPerformed
