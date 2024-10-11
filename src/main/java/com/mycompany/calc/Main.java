@@ -4,6 +4,8 @@
 
 package com.mycompany.calc;
 
+
+
 /**
  *
  * @author Mostafa
@@ -11,7 +13,8 @@ package com.mycompany.calc;
 public class Main {
 
     public static void main(String[] args) {
-        new MainFrame().setVisible(true);
-        
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
+
     }
 }
