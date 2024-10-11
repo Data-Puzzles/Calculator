@@ -9,15 +9,18 @@ import Exceptions.CalculatorException;
 
 /**
  *
- * @author crypt
+ * @author Ahmed El-esseily (Crypt212)
  */
 public final class Evaluator {
-	private static HashMap<String, Operation> textToOperation;
-	private static HashMap<String, Double> variable;
-	private Stack<Token> result;
+	final private static HashMap<String, Operation> textToOperation = new HashMap<>();
+	final private static HashMap<String, Double> variable = new HashMap<>();
+	final private Stack<Token> postfix;
+	final private Stack<Double> result;
 	
-	Evaluator () {
-    setOperation("(", 1, -10, n -> {return n[0];}); // operandCount, precedence and method are 
+	public Evaluator () {
+		postfix = new Stack<>();
+		result = new Stack<>();
+    setOperation("(", 1, 0, n -> {return n[0];}); // operandCount, precedence and method are 
     																								// just placeholders and are not required here.
 		setOperation("+", 2, 1, n -> {
 			return n[0] + n[1];
@@ -56,6 +59,21 @@ public final class Evaluator {
 		setOperation("sin", 1, -1, n -> {
 			return Math.sin(n[0]);
 		});
+		setOperation("cos", 1, -1, n -> {
+			return Math.cos(n[0]);
+		});
+		setOperation("tan", 1, -1, n -> {
+			return Math.tan(n[0]);
+		});
+		setOperation("fib", 1, -1, n -> {
+			if (n[0] == 0 || n[0] == 1) return 1.0;
+			Double f0 = 1.0; Double f1 = 1.0;
+			for (int i = 2; i <= n[0]; i++) {
+				f1 += f0;
+				f0 = f1 - f0;
+			}
+			return f1;
+		});
 	}
 	/**
 		textToOperation converts the operation in a string to actual
@@ -69,69 +87,7 @@ public final class Evaluator {
 		
 		Note: if precedence is -1 that means it well be treated as a function.
 	*/
-  public void addVariable () {}
-	public void setOperation (String text,
-													 int operandCount,
-													 int precedence,
-													 OperationFunction fun) {
-		textToOperation.put(text, new Operation(operandCount, precedence, fun));
-	}
-	public void calculateExpression (String expr) throws CalculatorException {
-		Stack<Operation> operations = new Stack<> ();
-		Stack<Token> postfix = new Stack<> ();
-		boolean notOperation = false;
-		char c;
-		for (int i = 0; i < expr.length(); i++) {
-			c = expr.charAt(i);
-			if ((c >= '0' && c <= '9') || c == '.') {
-				if (notOperation)
-					throw new CalculatorException("Syntax Error: Couldn't find operation at " + i);
-				notOperation = true;
-				int end = endOfParseToDouble(expr, i);
-				Double num = Double.valueOf(expr.substring(i, end));
-				Token tok = new Token(Token.TokenType.OPERAND);
-				tok.setNumber(num);
-				postfix.push(tok);
-				i = end + 1;
-			} else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
-				if (notOperation)
-					throw new CalculatorException("Syntax Error: Couldn't find operation at " + i);
-				notOperation = true;
-				int end = endOfParseToNotNumber(expr, i);
-				String tokenString = expr.substring(i, end);
-				if (textToOperation.containsKey(tokenString)) {	// tokenString is function or operator
-					Operation op = textToOperation.get(tokenString);
-					if (op.getPrecedence() == -1) { // function 
-
-						// check to see the parentheses after the function
-						for (int j = i; j < expr.length(); j++) { 
-							if (expr.charAt(j) == ' ') continue;
-							if (expr.charAt(j) == '(') break; // OK
-							throw new CalculatorException("Syntax Error: There must be perantheses after function at " + j);
-						}
-						Token function = new Token(Token.TokenType.OPERATION);
-						function.setOperation(op);
-						postfix.push(function);
-					} else if (op.getPrecedence() >= 0) { // operator
-						while (!postfix.empty() &&
-							op.getPrecedence() <=
-							postfix.lastElement().getOperation().getPrecedence()) {
-							Token t = new Token(Token.TokenType.OPERATION);
-							t.setOperation(operations.pop());
-							postfix.push(t);
-						}
-						operations.push(op);
-					}
-					
-				} else if(variable.containsKey(tokenString)) {	// tokenString is variable
-					
-				} else { 				// tokenString is typo
-					throw new CalculatorException("Syntax Error: Unknown token at " + i);
-				}
-			}
-		}
-	}
-	private int endOfParseToDouble (String expr, int start) throws CalculatorException {
+	private int endOfParseToNumber (String expr, int start) throws CalculatorException {
 		boolean pointFound = false;
 		char c;
 		for (int i = start; i < expr.length(); i++) {
@@ -143,7 +99,7 @@ public final class Evaluator {
 				continue;
 			}
 			if (c >= '0' && c <= '9') continue;
-			return i;
+			return i - 1;
 		}
 		return expr.length() - 1;
 	}
@@ -152,20 +108,203 @@ public final class Evaluator {
 		for (int i = start; i < expr.length(); i++) {
 			c = expr.charAt(i);
 			if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) continue;
-			return i;
+			return i - 1;
 		}
 		return expr.length() - 1;
 	}
+	private void posfixPushDouble (Double num) {
+		Token tok = new Token(Token.TokenType.OPERAND);
+		tok.setNumber(num);
+		postfix.push(tok);
+	}
+	private void posfixPushOperation (Operation opr) {
+		Token tok = new Token(Token.TokenType.OPERATION);
+		tok.setOperation(opr);
+		postfix.push(tok);
+	}
+	private String checkExpressionFront (String expr, int start) throws CalculatorException {
+		char c;
+		for (int i = start; i < expr.length(); i++) {
+			c = expr.charAt(i);
+			if (c == ' ') {} // do nothing
+			else if ((c >= '0' && c <= '9') || c == '(') // first of expression is a number 
+				break;
+			else if (c == '+' ||c == '-') { // found plus or minus sign infront of expression 
+				String firstHalf = new String(expr.substring(0, i));
+				String secondHalf = new String(expr.substring(i, expr.length()));
+				expr = firstHalf + "0" + secondHalf; // add 0 befor the sign
+				break;
+			}
+			else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+				int end = endOfParseToNotNumber(expr, i);
+				String tok = expr.substring(i, end + 1);
+				
+				if (variable.containsKey(tok))
+					break; // first of expression is a variable
+				
+				if (textToOperation.containsKey(tok) && textToOperation.get(tok).getPrecedence() == -1)
+					break; // first of expression is a function
+				
+			}
+			else
+				throw new CalculatorException("Syntax Error: operator at index " + i + " is not allawed");
+		}
+		return expr;
+	}
+	public void addVariable (String name, Double value) throws CalculatorException {
+		if (textToOperation.containsKey(name)) 
+			throw new CalculatorException("This variable name is resevred in operations.");
+		variable.put(name, value);
+	}
+	public void setOperation (String name,
+	                          int operandCount,
+	                          int precedence,
+	                          OperationFunction fun) {
+		textToOperation.put(name, new Operation(name, operandCount, precedence, fun));
+	}
+	public Double calculateExpression(String expr) throws CalculatorException {
+		preparePostfix(expr);
+		
+		result.clear();
+		for (int i = 0; i < postfix.size(); i++) {
+			switch (postfix.elementAt(i).getType()) {
+				case OPERAND -> result.push(postfix.elementAt(i).getNumber());
+				case OPERATION -> {
+					Operation op = new Operation(postfix.elementAt(i).getOperation());
+					int size = op.getOperandsCount();
+					Double[] operands = new Double [size];
+					for (int j = 0; j < size; j++) {
+						if (postfix.empty()) 
+							throw new CalculatorException ("Syntax Error: Number of arguments for " + op.getName() + " operation can only be " + op.getOperandsCount());
+						operands[size - j - 1] = result.pop();
+					}
+					result.push(op.method.compute(operands));
+				}
+
+			}
+		}
+		if (result.size() != 1) throw new CalculatorException ("WTF1" + result.size());
+		
+		return result.peek();
+	}
+
+
+	public void preparePostfix (String expr) throws CalculatorException {
+		Stack<Operation> operations = new Stack<> ();
+		boolean lastNotOperator = false; // first element to be scaned must not be an operator
+		int commaCount = 0; // for function calls
+		char c;
+
+		// make sure if first is a number
+		expr = checkExpressionFront(expr, 0);
+		for (int i = 0; i < expr.length(); i++) {
+			c = expr.charAt(i);
+			
+			// -------space--------
+			if (c == ' ') continue;
+
+			// ------------------------- leteral number -----------------------------
+			if ((c >= '0' && c <= '9') || c == '.') { 
+
+				if (lastNotOperator)
+					throw new CalculatorException("Syntax Error: Couldn't find operator at index " + i);
+				lastNotOperator = true;
+				int end = endOfParseToNumber(expr, i);
+				Double num = Double.valueOf(expr.substring(i, end + 1));
+				posfixPushDouble(num);
+				i = end;
+						
+			// ---------------------- function or variable ---------------------------
+			} else if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
+					
+				if (lastNotOperator)
+					throw new CalculatorException("Syntax Error: Couldn't find operator at index " + i);
+				lastNotOperator = true;
+
+				int end = endOfParseToNotNumber(expr, i);
+				String tokenString = expr.substring(i, end + 1);
+				i = end;
+				if (textToOperation.containsKey(tokenString)	// function  ----------
+					&& textToOperation.get(tokenString).getPrecedence() == -1) {
+					Operation op = textToOperation.get(tokenString);
+
+					// check to see the perantheses after the function
+					for (int j = i + 1; j < expr.length(); j++) { 
+						if (expr.charAt(j) == ' ') continue;
+						if (expr.charAt(j) != '(') 
+							throw new CalculatorException("Syntax Error: There must be perantheses after function at index " + j);
+						break; // OK!
+					}
+					commaCount = op.operandsCount - 1; // need exactly commaCount comma's to end this function
+					operations.push(op);
+					
+					
+				} else if (variable.containsKey(tokenString)) {	// variable -----------
+					
+					posfixPushDouble(variable.get(tokenString));
+					
+				} else // token is typo -----------------------------------------------
+					
+					throw new CalculatorException("Syntax Error: Unknown token at index " + i);
+
+			// --------------------------- operator ---------------------------------
+			} else if (textToOperation.containsKey(String.valueOf(c))) {
+
+				if ((c != '(') && !lastNotOperator) // two operators in a row, (ex. 1 + + 2)
+					throw new CalculatorException("Syntax Error: Operand needed at index " + i);
+				lastNotOperator = false;
+				
+				if (c == '(') expr = checkExpressionFront(expr, i + 1);
+				Operation op = textToOperation.get(String.valueOf(c));
+				if (!(op.getPrecedence() <= 0)) 
+					while (!operations.empty() &&
+						op.getPrecedence() <=
+						operations.peek().getPrecedence()) {
+						posfixPushOperation(operations.pop());
+					}
+				
+				operations.push(op);
+						
+			// -------------- end of perantheses or function comma ------------------
+			} else if (c == ')' || c == ',') {
+				
+				lastNotOperator = false;
+				while (!operations.empty() && 
+					operations.peek().getPrecedence() != 0) // not the '(' operator
+					posfixPushOperation(operations.pop());
+				
+				if (operations.empty()) 
+					throw new CalculatorException("Syntax Error: Found closing ) at index " + i + ", but did find the opening");
+				if (c == ')') {
+					lastNotOperator = true;
+					operations.pop(); // throw the ')' operator
+					if (!operations.empty() &&
+					     operations.peek().getPrecedence() == -1) // function
+						posfixPushOperation(operations.pop());
+					if (commaCount != 0) {
+						throw new CalculatorException("Syntax Error: Function at index " + i + " must take more arguements");
+					}
+				}
+				if (c == ',') {
+					expr = checkExpressionFront(expr, i + 1);
+					if (commaCount-- < 0)
+						throw new CalculatorException("Syntax Error: Function at index " + i + " must take less arguements");
+				}
+				
+			// ------------------------ Unknown -------------------------------------
+			} else
+				throw new CalculatorException("Syntax Error: Unknown token at index " + i);
+		}
+
+		// cleanup the operations stack
+		if (!lastNotOperator)
+			throw new CalculatorException("Syntax Error: An operand is required at the end of expression");
+		while (!operations.empty()) {
+			if (operations.peek().getPrecedence() == 0) // found '('
+				throw new CalculatorException("Syntax Error: Found opening ( but didn't find the closing");
+			posfixPushOperation(operations.pop());
+		}
+
+		
+	}
 };
-
-/*
-
-1 * 1 + 2 * 5 / 2
-
-opr
-* 
-postfix
-1 1
-
-result
-*/

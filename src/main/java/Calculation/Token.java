@@ -6,13 +6,14 @@ package Calculation;
 
 /**
  *
- * @author crypt
+ * @author Ahmed El-esseily (Crypt212)
  */
+
 public class Token {
-	public final TokenType type;
+	public enum TokenType {OPERAND, OPERATION};
+	private final TokenType type;
 	private Operation opr;
 	private Double number;
-	public enum TokenType {OPERAND, OPERATION};
 	public Token (TokenType type) {
 		number = 0.0;
 		opr = null;
