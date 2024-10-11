@@ -17,7 +17,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author Mostafa
+ * @author Mostafa Mahmoud
  */
 public class MainFrame extends javax.swing.JFrame {
 

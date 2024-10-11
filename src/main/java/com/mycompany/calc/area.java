@@ -1,5 +1,9 @@
 package com.mycompany.calc;
 
+/**
+ *
+ * @author Mostafa kmal
+ */
 abstract class Shape {
     private String law;
     abstract double calculateArea();
