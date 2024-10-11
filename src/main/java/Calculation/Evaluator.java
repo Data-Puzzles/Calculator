@@ -17,9 +17,23 @@ public final class Evaluator {
 	final private Stack<Token> postfix;
 	final private Stack<Double> result;
 	
-	public Evaluator () {
+	public Evaluator () throws CalculatorException {
 		postfix = new Stack<>();
 		result = new Stack<>();
+			/**
+				textToOperation converts the operation in a string to actual
+				operation that can be applied to operands. Example:
+
+					textToOperation.put("+", new Operation(2, 1, (n) -> {
+						return n[0] + n[1];
+					}));
+				
+				This converts "+" sign into an operation that takes to arguments
+				and its precedence is 1, and finally the function itself.
+
+				Note: if precedence is -1 that means it well be treated as a function.
+			*/
+			
     setOperation("(", 1, 0, n -> {return n[0];}); // operandCount, precedence and method are 
     																								// just placeholders and are not required here.
 		setOperation("+", 2, 1, n -> {
@@ -32,6 +46,8 @@ public final class Evaluator {
 			return n[0] * n[1];
 		});
 		setOperation("/", 2, 2, n -> {
+			if (n[1] == 0) 
+				throw new CalculatorException("Math Error: Can't divid by zero");
 			return n[0] / n[1];
 		});
 		setOperation("^", 2, 3, n -> {
@@ -75,18 +91,6 @@ public final class Evaluator {
 			return f1;
 		});
 	}
-	/**
-		textToOperation converts the operation in a string to actual
-		operation that can be applied to operands. Example:
-
-	textToOperation.put("+", new Operation(2, 1, (n) -> {
-		return n[0] + n[1];
-	}));
-		This converts "+" sign into an operation that takes to arguments
-		and its precedence is 1, and finally the function itself.
-		
-		Note: if precedence is -1 that means it well be treated as a function.
-	*/
 	private int endOfParseToNumber (String expr, int start) throws CalculatorException {
 		boolean pointFound = false;
 		char c;
@@ -151,7 +155,7 @@ public final class Evaluator {
 		}
 		return expr;
 	}
-	public void addVariable (String name, Double value) throws CalculatorException {
+	public void setVariable (String name, Double value) throws CalculatorException {
 		if (textToOperation.containsKey(name)) 
 			throw new CalculatorException("This variable name is resevred in operations.");
 		variable.put(name, value);
