@@ -1037,7 +1037,26 @@ public class MainFrame extends javax.swing.JFrame {
     private void equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalActionPerformed
         String m = txt.getText();
         try{
-          txt.setText(String.valueOf(ev.calculateExpression(m))); 
+          Double res = ev.calculateExpression(m); 
+					String resString = String.valueOf(res);
+					String numberSide = resString;
+					String ESide = "";
+					
+					if (resString.indexOf('E') != -1) {
+						ESide = resString.substring(resString.indexOf('E'));
+						numberSide = resString.substring(0, resString.indexOf('E'));
+					}
+					
+					System.out.println(numberSide);
+					System.out.println(ESide);
+
+					if (numberSide.substring(numberSide.length() - 2).compareTo(".0") == 0)
+						numberSide = numberSide.substring(0, numberSide.length() - 2);
+					
+					resString = numberSide + ESide;
+					                                      
+					txt.setText(resString);
+					
         }catch (CalculatorException e){
             System.out.println(e);
         }

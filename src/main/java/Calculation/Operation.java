@@ -39,7 +39,7 @@ public class Operation {
 	}
 	public Double call(Double[] operands) throws CalculatorException {
 		if (operands.length != operandsCount)
-			throw new CalculatorException("Number operands doesn't match function's operands");
+			throw new CalculatorException("Definition Error", "Number operands doesn't match function's operands");
 		return this.method.compute(operands);
 	}
 };
