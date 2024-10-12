@@ -53,16 +53,17 @@ public final class Evaluator {
 		setOperation("^", 2, 3, n -> {
 			return Math.pow(n[0], n[1]);
 		});
-		setOperation("!", 1, 3, n -> {
+		
+                setOperation("E", 2, 10, n -> {
+                    return n[0] * Math.pow(10, n[1]);
+                });
+                setOperation("fact", 1, -1, n -> {
 			Double fact = 1.0;
 			for (int i = 1; i <= n[0]; i++) {
 				fact *= i;
 			}
 			return fact;
 		});
-                setOperation("E", 2, 10, n -> {
-                    return n[0] * Math.pow(10, n[1]);
-                });
 		setOperation("root", 2, -1, n -> {
 			return Math.pow(n[0], 1 / n[1]);
 		});
@@ -84,6 +85,13 @@ public final class Evaluator {
 		setOperation("tan", 1, -1, n -> {
 			return Math.tan(n[0] * Math.PI / 180);
 		});
+                setOperation("ln",1 , -1, n->{
+                    return Math.log1p(n[0]);
+                });
+                setOperation("log",2 , -1, n->{
+                    return Math.log(n[1])/Math.log(n[0]);
+                });
+                
 		setOperation("fib", 1, -1, n -> {
 			if (n[0] == 0 || n[0] == 1) return 1.0; 
 			Double f0 = 1.0; Double f1 = 1.0;
@@ -93,9 +101,7 @@ public final class Evaluator {
 			}
 			return f1;
 		});
-                setOperation("ahmed", 1, -1, n -> {
-                    return n[0] * 3 + 5;
-                });
+
 	}
 	private int endOfParseToNumber (String expr, int start) throws CalculatorException {
 		boolean pointFound = false;
@@ -220,7 +226,7 @@ public final class Evaluator {
 			if ((c >= '0' && c <= '9') || c == '.') { 
 
 				if (lastNotOperator)
-					throw new CalculatorException("Syntax Error: Couldn't find operator at index " + i);
+                                    throw new CalculatorException("Syntax Error: Couldn't find operator at index " + i);
 				lastNotOperator = true;
 				int end = endOfParseToNumber(expr, i);
 				Double num = Double.valueOf(expr.substring(i, end + 1));

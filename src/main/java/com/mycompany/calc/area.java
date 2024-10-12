@@ -34,7 +34,7 @@ class Triangle extends Shape {
     public Triangle(double base, double height) {
         this.base = base;
         this.height = height;
-        setLaw("Area = L × L");
+        setLaw("Area = 0.5 × b × h");
     }
 
     public double calculateArea() {
@@ -46,6 +46,7 @@ class Circle extends Shape {
 
     public Circle(double radius) {
         this.radius = radius;
+        setLaw("Area = π × r^2");
     }
 
     public double  calculateArea() {
@@ -67,4 +68,4 @@ class Rectangle extends Shape {
         return length * width;
         
     }
-}
+};
