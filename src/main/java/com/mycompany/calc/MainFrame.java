@@ -39,11 +39,13 @@ public class MainFrame extends javax.swing.JFrame {
     private String eqTemp;
     private Stack<String> eqStack = new Stack<>();
     private Stack<String> resultStack = new Stack<>();
+    private Boolean resultDone;
     
     /**
      * Creates new form NewJFrame
      */
     public MainFrame() {
+        resultDone = false;
         initComponents();
         Color col = new Color(39,49,57);
         getContentPane().setBackground(col);
@@ -140,7 +142,11 @@ public class MainFrame extends javax.swing.JFrame {
             showMessageDialog(null, "ERROR\nINVALID INPUT", "INVALID INPUT", ERROR_MESSAGE);
         }
     }
-    private void set(String s){
+    private void set(String s, boolean basicOperator){
+        if (resultDone && !basicOperator) 
+            txt.setText("");
+
+        resultDone = false;
         String all = txt.getText()+s;
         txt.setText(all);
     }
@@ -215,6 +221,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         mode1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel25 = new javax.swing.JLabel();
+        mode2 = new javax.swing.JButton();
+        mode3 = new javax.swing.JButton();
         ModeWin = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -595,7 +605,7 @@ public class MainFrame extends javax.swing.JFrame {
         ANS.getAccessibleContext().setAccessibleDescription("");
 
         leftPerantheses.setBackground(new java.awt.Color(54, 67, 76));
-        leftPerantheses.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        leftPerantheses.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         leftPerantheses.setForeground(new java.awt.Color(226, 241, 231));
         leftPerantheses.setText("(");
         leftPerantheses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -604,11 +614,11 @@ public class MainFrame extends javax.swing.JFrame {
                 leftPeranthesesActionPerformed(evt);
             }
         });
-        BasicWin.add(leftPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 322, 62, 50));
+        BasicWin.add(leftPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 270, 30, 30));
         leftPerantheses.getAccessibleContext().setAccessibleDescription("");
 
         rightPerantheses.setBackground(new java.awt.Color(54, 67, 76));
-        rightPerantheses.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        rightPerantheses.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         rightPerantheses.setForeground(new java.awt.Color(226, 241, 231));
         rightPerantheses.setText(")");
         rightPerantheses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -617,7 +627,7 @@ public class MainFrame extends javax.swing.JFrame {
                 rightPeranthesesActionPerformed(evt);
             }
         });
-        BasicWin.add(rightPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 322, 62, 50));
+        BasicWin.add(rightPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 270, 30, 30));
         rightPerantheses.getAccessibleContext().setAccessibleDescription("");
 
         sin.setBackground(new java.awt.Color(54, 67, 76));
@@ -760,8 +770,48 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("HISTORY");
-        BasicWin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 250, 50, 22));
+        jLabel1.setText("ANGLE");
+        BasicWin.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 250, 30, 22));
+
+        jToggleButton1.setBackground(new java.awt.Color(54, 67, 76));
+        jToggleButton1.setForeground(new java.awt.Color(226, 241, 231));
+        jToggleButton1.setText("DEG");
+        jToggleButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+        BasicWin.add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(207, 270, 60, 30));
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("HISTORY");
+        BasicWin.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 250, 50, 22));
+
+        mode2.setBackground(new java.awt.Color(54, 67, 76));
+        mode2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mode2.setForeground(new java.awt.Color(226, 241, 231));
+        mode2.setText("π");
+        mode2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mode2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mode2ActionPerformed(evt);
+            }
+        });
+        BasicWin.add(mode2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 322, 62, 50));
+
+        mode3.setBackground(new java.awt.Color(54, 67, 76));
+        mode3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        mode3.setForeground(new java.awt.Color(226, 241, 231));
+        mode3.setText("e");
+        mode3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        mode3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mode3ActionPerformed(evt);
+            }
+        });
+        BasicWin.add(mode3, new org.netbeans.lib.awtextra.AbsoluteConstraints(77, 322, 60, 50));
 
         jTabbedPane1.addTab("tab1", BasicWin);
 
@@ -1609,43 +1659,43 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ligtingModeActionPerformed
 
     private void dot1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dot1ActionPerformed
-        set(", ");
+        set(", ", false);
     }//GEN-LAST:event_dot1ActionPerformed
 
     private void logNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logNActionPerformed
-        set("log(");
+        set("log(", false);
     }//GEN-LAST:event_logNActionPerformed
 
     private void log10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_log10ActionPerformed
-        set("ln(");
+        set("ln(", false);
     }//GEN-LAST:event_log10ActionPerformed
 
     private void factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_factActionPerformed
-        set("fact(");
+        set("fact(", false);
     }//GEN-LAST:event_factActionPerformed
 
     private void rootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rootActionPerformed
-        set("root(");
+        set("root(", false);
     }//GEN-LAST:event_rootActionPerformed
 
     private void tanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tanActionPerformed
-        set("tan(");
+        set("tan(", false);
     }//GEN-LAST:event_tanActionPerformed
 
     private void cosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cosActionPerformed
-        set("cos(");
+        set("cos(", false);
     }//GEN-LAST:event_cosActionPerformed
 
     private void sinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sinActionPerformed
-        set("sin(");
+        set("sin(", false);
     }//GEN-LAST:event_sinActionPerformed
 
     private void rightPeranthesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rightPeranthesesActionPerformed
-        set(")");
+        set(")", false);
     }//GEN-LAST:event_rightPeranthesesActionPerformed
 
     private void leftPeranthesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leftPeranthesesActionPerformed
-        set("(");
+        set("(", false);
     }//GEN-LAST:event_leftPeranthesesActionPerformed
 
     private void ANSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ANSActionPerformed
@@ -1657,10 +1707,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ANSActionPerformed
 
     private void dotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dotActionPerformed
-        set(".");
+        set(".", false);
     }//GEN-LAST:event_dotActionPerformed
 
     private void equalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equalActionPerformed
+        resultDone = true;
         String m = txt.getText();
         eqTemp =m;
         try{
@@ -1678,6 +1729,11 @@ public class MainFrame extends javax.swing.JFrame {
             if (numberSide.substring(numberSide.length() - 2).compareTo(".0") == 0)
                     numberSide = numberSide.substring(0, numberSide.length() - 2);
 
+            ESide = ESide.replace("E", "*10^");
+            int minusSign = ESide.indexOf("-");
+            if (minusSign != -1) {
+                ESide = ESide.replace("-", "(-") + ")"; // turns 10^-4 into 10^(-4)
+            }
             resString = numberSide + ESide;
            
             txt.setText(resString);
@@ -1700,19 +1756,23 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_ACActionPerformed
 
     private void minusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minusActionPerformed
-        set("-");
+        String strOfLastChar = txt.getText().substring(txt.getText().length() - 1);
+        if (ev.textToOperation.containsKey(strOfLastChar) &&            // if previous char is oparator
+            ev.textToOperation.get(strOfLastChar).getPrecedence() > 0)  // make sure it is "operator"
+            set("(", false);                                                   // seperate that mf
+        set("-", true);
     }//GEN-LAST:event_minusActionPerformed
 
     private void plusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusActionPerformed
-        set("+");
+        set("+", true);
     }//GEN-LAST:event_plusActionPerformed
 
     private void dividActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dividActionPerformed
-        set("/");
+        set("/", true);
     }//GEN-LAST:event_dividActionPerformed
 
     private void multActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multActionPerformed
-        set("*");
+        set("*", true);
     }//GEN-LAST:event_multActionPerformed
 
     private void DELActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DELActionPerformed
@@ -1724,43 +1784,43 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_DELActionPerformed
 
     private void nineActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nineActionPerformed
-        set("9");
+        set("9", false);
     }//GEN-LAST:event_nineActionPerformed
 
     private void eightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eightActionPerformed
-        set("8");
+        set("8", false);
     }//GEN-LAST:event_eightActionPerformed
 
     private void sevenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sevenActionPerformed
-        set("7");
+        set("7", false);
     }//GEN-LAST:event_sevenActionPerformed
 
     private void sixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sixActionPerformed
-        set("6");
+        set("6", false);
     }//GEN-LAST:event_sixActionPerformed
 
     private void fiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiveActionPerformed
-        set("5");
+        set("5", false);
     }//GEN-LAST:event_fiveActionPerformed
 
     private void fourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fourActionPerformed
-        set("4");
+        set("4", false);
     }//GEN-LAST:event_fourActionPerformed
 
     private void threeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_threeActionPerformed
-        set("3");
+        set("3", false);
     }//GEN-LAST:event_threeActionPerformed
 
     private void twoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twoActionPerformed
-        set("2");
+        set("2", false);
     }//GEN-LAST:event_twoActionPerformed
 
     private void oneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_oneActionPerformed
-        set("1");
+        set("1", false);
     }//GEN-LAST:event_oneActionPerformed
 
     private void zeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroActionPerformed
-        set("0");
+        set("0", false);
     }//GEN-LAST:event_zeroActionPerformed
 
     private void txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtActionPerformed
@@ -1768,7 +1828,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtActionPerformed
 
     private void powActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_powActionPerformed
-        set("^");
+        set("^", true);
     }//GEN-LAST:event_powActionPerformed
 
     private void modeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modeActionPerformed
@@ -1951,6 +2011,41 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
         jLabel24.setText("<html>make volume calculation</html>");
     }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        if (jToggleButton1.isSelected()) {
+            jToggleButton1.setText("RAD");
+            ev.setOperation("sin", 1, -1, n -> {
+		return Math.sin(n[0]);
+		});
+            ev.setOperation("cos", 1, -1, n -> {
+        	return Math.cos(n[0]);
+            });
+            ev.setOperation("tan", 1, -1, n -> {
+		return Math.tan(n[0]);
+            });
+        } else {
+            jToggleButton1.setText("DEG");
+            ev.setOperation("sin", 1, -1, n -> {
+		return Math.sin(n[0] * Math.PI / 180);
+		});
+            ev.setOperation("cos", 1, -1, n -> {
+        	return Math.cos(n[0] * Math.PI / 180);
+            });
+            ev.setOperation("tan", 1, -1, n -> {
+		return Math.tan(n[0] * Math.PI / 180);
+            });
+
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void mode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mode2ActionPerformed
+        set("π", false);
+    }//GEN-LAST:event_mode2ActionPerformed
+
+    private void mode3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mode3ActionPerformed
+        set("e", false);
+    }//GEN-LAST:event_mode3ActionPerformed
            
   
     /**
@@ -2035,6 +2130,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -2047,6 +2143,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton leftPerantheses;
     private javax.swing.JToggleButton ligtingMode;
     private javax.swing.JButton log10;
@@ -2054,6 +2151,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton minus;
     private javax.swing.JButton mode;
     private javax.swing.JButton mode1;
+    private javax.swing.JButton mode2;
+    private javax.swing.JButton mode3;
     private javax.swing.JButton mult;
     private javax.swing.JButton nine;
     private javax.swing.JButton one;
