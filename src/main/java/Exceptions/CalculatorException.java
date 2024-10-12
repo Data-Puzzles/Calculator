@@ -6,10 +6,14 @@ package Exceptions;
 
 /**
  *
- * @author crypt
+ * @author Ahmed El-esseily (Crypt212)
  */
 public class CalculatorException extends Exception {
-	public CalculatorException (String message) {
-		super(message);
+	public String errorType;
+	public String error;
+	public CalculatorException (String errorType, String error) {
+		super(errorType + ": " + error);
+		this.errorType = errorType;
+		this.error = error;
 	}
 }

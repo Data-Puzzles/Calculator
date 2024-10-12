@@ -7,9 +7,11 @@ package com.mycompany.calc;
 import Calculation.Evaluator;
 import Exceptions.CalculatorException;
 import java.awt.Color;
+import static java.awt.Color.red;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 import java.util.Stack;
 import static javax.management.Query.gt;
 import javax.swing.JButton;
@@ -55,6 +57,17 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
       //buttons in main 
+    Component[] components = this.getContentPane().getComponents();
+    JButton[] buttons = new JButton[0];
+    for (Component component : components) {
+        if (component instanceof JButton) {
+            buttons = Arrays.copyOf(buttons, buttons.length + 1);
+            buttons[buttons.length - 1] = (JButton) component;
+        }
+    }
+    for (JButton button : buttons) {
+        button.setBackground(Color.RED);
+    }
         btw = new JButton[25];
         btw[0] = zero;
         btw[1] = one;
@@ -82,6 +95,7 @@ public class MainFrame extends javax.swing.JFrame {
         btw[23] =cos;
         btw[24] =tan;
     }
+    
     //my functions-
     
     private void numberOnly(java.awt.event.KeyEvent evt){
@@ -1565,17 +1579,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void ligtingModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ligtingModeActionPerformed
         if (ligtingMode.isSelected()) {//لو كان شغال هيشغل اليت مود
 
-            jLabel1.setText("DARKMODE OFF");
-            Color color_white = new Color(255, 255, 255);
-            Color color_txt_light = new Color(207,209,208);
-            Color color_label_dark = new Color(0,0,0);
-            getContentPane().setBackground(color_white);
-            txt.setBackground(color_txt_light );
-            txt.setForeground(color_label_dark);
-            jLabel1.setForeground(color_label_dark);
-            setBtwColor(color_txt_light);
-            setBtwTxtColor(color_label_dark);
-            BasicWin.setBackground(color_txt_light);
+//            jLabel1.setText("DARKMODE OFF");
+//            Color color_white = new Color(255, 255, 255);
+//            Color color_txt_light = new Color(207,209,208);
+//            Color color_label_dark = new Color(0,0,0);
+//            getContentPane().setBackground(color_white);
+//            txt.setBackground(color_txt_light );
+//            txt.setForeground(color_label_dark);
+//            jLabel1.setForeground(color_label_dark);
+//            setBtwColor(color_txt_light);
+//            setBtwTxtColor(color_label_dark);
+//            BasicWin.setBackground(color_txt_light);
 
         } else {
 
@@ -1650,15 +1664,37 @@ public class MainFrame extends javax.swing.JFrame {
         String m = txt.getText();
         eqTemp =m;
         try{
-            String result = String.valueOf(ev.calculateExpression(m));
-            txt.setText(result);
-            resultTemp = result;
+            
+            Double res = ev.calculateExpression(m); 
+            String resString = String.valueOf(Round(res, 8));
+            String numberSide = resString;
+            String ESide = "";
+
+            if (resString.indexOf('E') != -1) {
+                    ESide = resString.substring(resString.indexOf('E'));
+                    numberSide = resString.substring(0, resString.indexOf('E'));
+            }
+
+            if (numberSide.substring(numberSide.length() - 2).compareTo(".0") == 0)
+                    numberSide = numberSide.substring(0, numberSide.length() - 2);
+
+            resString = numberSide + ESide;
+           
+            txt.setText(resString);
+            resultTemp = resString ;
             History(resultTemp,eqTemp,jTextPane1);
+            
+            txt.setText(resString);
+
         }catch (CalculatorException e){
-            showMessageDialog(null,e.getMessage(),"ERROR", ERROR_MESSAGE);
+            showMessageDialog(null,e.error, e.errorType, ERROR_MESSAGE);
         }
     }//GEN-LAST:event_equalActionPerformed
-
+    
+    private Double Round(Double val, int n) {
+        double valBig = Math.floor(val * Math.pow(10, n) + 0.5);
+        return valBig / Math.pow(10, n);
+    }
     private void ACActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ACActionPerformed
         txt.setText("");
     }//GEN-LAST:event_ACActionPerformed
