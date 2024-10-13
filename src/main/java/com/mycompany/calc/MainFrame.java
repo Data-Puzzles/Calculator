@@ -614,7 +614,7 @@ public class MainFrame extends javax.swing.JFrame {
                 leftPeranthesesActionPerformed(evt);
             }
         });
-        BasicWin.add(leftPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 270, 30, 30));
+        BasicWin.add(leftPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 260, 30, 50));
         leftPerantheses.getAccessibleContext().setAccessibleDescription("");
 
         rightPerantheses.setBackground(new java.awt.Color(54, 67, 76));
@@ -627,7 +627,7 @@ public class MainFrame extends javax.swing.JFrame {
                 rightPeranthesesActionPerformed(evt);
             }
         });
-        BasicWin.add(rightPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 270, 30, 30));
+        BasicWin.add(rightPerantheses, new org.netbeans.lib.awtextra.AbsoluteConstraints(173, 260, 30, 50));
         rightPerantheses.getAccessibleContext().setAccessibleDescription("");
 
         sin.setBackground(new java.awt.Color(54, 67, 76));
@@ -1629,17 +1629,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void ligtingModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ligtingModeActionPerformed
         if (ligtingMode.isSelected()) {//لو كان شغال هيشغل اليت مود
 
-//            jLabel1.setText("DARKMODE OFF");
-//            Color color_white = new Color(255, 255, 255);
-//            Color color_txt_light = new Color(207,209,208);
-//            Color color_label_dark = new Color(0,0,0);
-//            getContentPane().setBackground(color_white);
-//            txt.setBackground(color_txt_light );
-//            txt.setForeground(color_label_dark);
-//            jLabel1.setForeground(color_label_dark);
-//            setBtwColor(color_txt_light);
-//            setBtwTxtColor(color_label_dark);
-//            BasicWin.setBackground(color_txt_light);
+            jLabel1.setText("DARKMODE OFF");
+            Color color_white = new Color(255, 255, 255);
+            Color color_txt_light = new Color(207,209,208);
+            Color color_label_dark = new Color(0,0,0);
+            getContentPane().setBackground(color_white);
+            txt.setBackground(color_txt_light );
+            txt.setForeground(color_label_dark);
+            jLabel1.setForeground(color_label_dark);
+            setBtwColor(color_txt_light);
+            setBtwTxtColor(color_label_dark);
+            BasicWin.setBackground(color_txt_light);
 
         } else {
 
