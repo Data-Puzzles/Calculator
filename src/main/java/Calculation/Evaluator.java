@@ -6,8 +6,6 @@ package Calculation;
 import java.util.Stack;
 import java.util.HashMap;
 import Exceptions.CalculatorException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -17,8 +15,6 @@ import java.util.regex.Pattern;
 public final class Evaluator {
 	final public static HashMap<String, Operation> textToOperation = new HashMap<>();
 	final public static HashMap<String, Double> constants = new HashMap<>();
-	private static final Pattern FUN_DEF_PAT = Pattern.compile("([a-zA-Z]+)\\(([^)]+)\\)=(.+)");
-	private static final Pattern VAR_DEF_PAT = Pattern.compile("([a-zA-Z]+)=(.+)");
 	
 	public Evaluator () throws CalculatorException {
 		initializeOperations();
@@ -208,17 +204,7 @@ public final class Evaluator {
 	
 	public Double calculateExpression(String expr) throws CalculatorException {
 		expr = expr.replace(" ", ""); // remove spaces
-                
-		Matcher matcher;
-		matcher = FUN_DEF_PAT.matcher(expr); // check if expr is a definition for a function
-		if (matcher.matches()) {
-			
-		}
-		matcher = VAR_DEF_PAT.matcher(expr);
-		if (matcher.matches()) {
-			
-		}
-		
+
 		Stack <Token> postfix = new Stack<>();
 		Stack <Double> result = new Stack<>();
 		preparePostfix(expr, postfix);
